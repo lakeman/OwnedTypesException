@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Update;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace OwnedTypes
@@ -14,6 +16,7 @@ namespace OwnedTypes
         static void Main(string[] args)
         {
             var options = new DbContextOptionsBuilder<Database>()
+                .ReplaceService<IComparer<ModificationCommand>, FixedComparer>()
                 .Options;
 
             Console.WriteLine("Create database...");
